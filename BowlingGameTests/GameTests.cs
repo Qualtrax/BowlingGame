@@ -1,31 +1,31 @@
-﻿using BowlingGame;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Namespace_1;
 
 namespace BowlingGameTests
 {
     [TestClass]
     public class GameTests
     {
-        private Game game;
+        private Namespace_1.Class1 game;
 
         [TestInitialize]
         public void Initialize()
         {
-            game = new Game();
+            game = new Class1();
         }
 
         [TestMethod]
         public void TestGutterGame()
         {
             RollMany(20, 0);
-            Assert.AreEqual(0, game.Score());
+            Assert.AreEqual(0, game.CalculateScoreForAllRollsInGame());
         }
 
         [TestMethod]
         public void TestAllOnes()
         {
             RollMany(20,1);
-            Assert.AreEqual(20, game.Score());
+            Assert.AreEqual(20, game.CalculateScoreForAllRollsInGame());
         }
 
         [TestMethod]
@@ -34,7 +34,7 @@ namespace BowlingGameTests
             RollSpare();
             game.Roll(3);
             RollMany(17,0);
-            Assert.AreEqual(16,game.Score());
+            Assert.AreEqual(16,game.CalculateScoreForAllRollsInGame());
         }
 
         [TestMethod]
@@ -44,14 +44,14 @@ namespace BowlingGameTests
             game.Roll(3);
             game.Roll(4);
             RollMany(16, 0);
-            Assert.AreEqual(24, game.Score());
+            Assert.AreEqual(24, game.CalculateScoreForAllRollsInGame());
         }
 
         [TestMethod]
         public void TestPerfectGame()
         {
             RollMany(12, 10);
-            Assert.AreEqual(300, game.Score());
+            Assert.AreEqual(300, game.CalculateScoreForAllRollsInGame());
         }
 
         private void RollStrike()

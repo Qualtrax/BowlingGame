@@ -27,7 +27,13 @@ namespace Namespace_1
         {
             Calculator calculator = Calculator.GetRollCalculator(rolls);
 
-            var score = calculator.GetScoreForRolls();
+            var score = 0;
+            int i = 0;
+
+            for (int f = 0; f < 10; f++)
+            {
+                calculator.GetScoreForFrame(ref score, ref i);
+            }
 
             return score;
         }

@@ -14,21 +14,25 @@
             return new Calculator(rolls);
         }
 
-        public void GetScoreForFrame(ref int score, ref int i)
+        public void GetScoreForAllRollsInGame(ref int score)
         {
-            // spares
-            if (rolls[i] + rolls[i + 1] == 10)
-            {
-                score += 10 + rolls[i + 2];
-                i++;
-            }
-            else
-            {
-                score += rolls[i] + rolls[i + 1];
-                i++;
-            }
+            int i = 0;
 
-            i++;
+            for (int f = 0; f < 10; f++)
+            {
+                // spares
+                if (rolls[i] + rolls[i + 1] == 10)
+                {
+                    score += 10 + rolls[i + 2];
+                    i++;
+                }
+                else
+                {
+                    score += rolls[i] + rolls[i + 1];
+                    i++;
+                }
+                i++;
+            }
         }
     }
 }

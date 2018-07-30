@@ -31,6 +31,7 @@
                     score += rolls[i] + rolls[i + 1];
                     i++;
                 }
+
                 i++;
             }
         }

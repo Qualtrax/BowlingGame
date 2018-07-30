@@ -20,7 +20,7 @@ namespace BowlingGameTests
             for (var i = 0; i < 20; i++)
                 game.Roll(0);
 
-            Assert.AreEqual(0, game.CalculateScoreForAllRollsInGame());
+            Assert.AreEqual(0, game.Score());
         }
 
         [TestMethod]
@@ -29,7 +29,7 @@ namespace BowlingGameTests
             for (var i = 0; i < 20; i++)
                 game.Roll(1);
 
-            Assert.AreEqual(20, game.CalculateScoreForAllRollsInGame());
+            Assert.AreEqual(20, game.Score());
         }
 
         [TestMethod]
@@ -42,7 +42,7 @@ namespace BowlingGameTests
             for (var i = 0; i < 17; i++)
                 game.Roll(0);
 
-            Assert.AreEqual(16, game.CalculateScoreForAllRollsInGame());
+            Assert.AreEqual(16, game.Score());
         }
     }
 }

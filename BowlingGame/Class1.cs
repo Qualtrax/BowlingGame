@@ -23,7 +23,7 @@ namespace Namespace_1
         /// Calculates the score for a game
         /// </summary>
         /// <returns>the score</returns>
-        public int CalculateScoreForAllRollsInGame()
+        public int Score()
         {
             Calculator calculator = Calculator.GetRollCalculator(rolls);
 

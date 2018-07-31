@@ -1,13 +1,23 @@
-﻿using BowlingGame;
+﻿using System.Linq;
+using System.Collections.Generic;
 
-namespace Namespace_1
+namespace BowlingGame
 {
-    public class Class1
+    public class Game
     {
-        // initializes rolls array
-        public int[] rolls = new int[21];
-        // initializes roll
         private int currentRoll = 0;
+        private int[] rolls = new int[21];
+
+        public ICalculator ScoreCalculator { get; set; }
+
+        public List<int> Rolls
+        {
+            get
+            {
+                return rolls.ToList();
+            }
+        }
+
 
         /// <summary>
         /// Adds a role
@@ -25,12 +35,7 @@ namespace Namespace_1
         /// <returns>the score</returns>
         public int Score()
         {
-            Calculator calculator = Calculator.GetRollCalculator(rolls);
-
-            var score = 0;
-            calculator.GetScoreForAllRollsInGame(ref score);
-
-            return score;
+            return ScoreCalculator.GetScoreForAllRollsInGame(rolls);
         }
     }
 }

@@ -1,17 +1,19 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Namespace_1;
+using BowlingGame;
 
 namespace BowlingGameTests
 {
     [TestClass]
     public class GameTests
     {
-        private Namespace_1.Class1 game;
+        private BowlingGame.Game game;
 
         [TestInitialize]
         public void Initialize()
         {
-            game = new Class1();
+            Calculator calculator = new Calculator();
+            game = new Game();
+            game.ScoreCalculator = calculator;
         }
 
         [TestMethod]

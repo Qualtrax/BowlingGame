@@ -26,7 +26,6 @@ namespace BowlingGameTests
         public void TestAllOnes()
         {
             RollMany(20, 1);
-
             Assert.AreEqual(20, game.Score());
         }
 
@@ -36,11 +35,28 @@ namespace BowlingGameTests
             game.Roll(5);
             game.Roll(5);
             game.Roll(3);
-            RollMany(17,0);
-            
-            Assert.AreEqual(16,game.Score());
+            RollMany(17, 0);
+
+            Assert.AreEqual(16, game.Score());
         }
-        
+        [TestMethod]
+        public void TestOneStrike()
+        {
+            game.Roll(10);
+            game.Roll(4);
+            game.Roll(2);
+
+            RollMany(16, 0);
+
+            Assert.AreEqual(22, game.Score());
+        }
+        [TestMethod]
+        public void TestPerfectGame()
+        {
+            RollMany(12, 10);
+
+            Assert.AreEqual(300, game.Score());
+        }
         private void RollMany(int numberOfRolls, int pins)
         {
             for (int i = 0; i < numberOfRolls; i++)

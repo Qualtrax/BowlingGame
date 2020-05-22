@@ -12,24 +12,53 @@
 
         public int Score()
         {
-            int s = 0;
-            int i = 0;
+            int score = 0;
+            int roll = 0;
 
-            for (int f = 0; f < 10; f++)
+            for (int frames = 0; frames < 10; frames++)
             {
-                if (rolls[i] + rolls[i + 1] == 10)
+                if (IsStrike(roll))
                 {
-                    s += 10 + rolls[i + 2];
+                    score += 10 + StrikeBonus(roll);
+                    roll++;
+                }
+                else if (IsSpare(roll))
+                {
+                    score += 10 + SpareBonus(roll);
+                    roll += 2;
                 }
                 else
                 {
-                    s += rolls[i] + rolls[i + 1];
+                    score += SumOfFrameRolls(roll);
+                    roll += 2;
                 }
-
-                i = i + 2;
             }
+            return score;
+        }
 
-            return s;
+        private int SumOfFrameRolls(int roll)
+        {
+            return rolls[roll] + rolls[roll + 1];
+        }
+
+        private int SpareBonus(int roll)
+        {
+            return rolls[roll + 2];
+        }
+
+        private int StrikeBonus(int roll)
+        {
+            return rolls[roll + 1] + rolls[roll + 2];
+        }
+
+        private bool IsSpare(int roll)
+        {
+            return rolls[roll] + rolls[roll + 1] == 10;
+        }
+
+        private bool IsStrike(int roll)
+        {
+            return rolls[roll] == 10;
         }
     }
 }

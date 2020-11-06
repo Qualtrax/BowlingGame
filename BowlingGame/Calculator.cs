@@ -1,6 +1,8 @@
-﻿namespace BowlingGame
+﻿using System.Linq;
+
+namespace BowlingGame
 {
-    class Calculator
+    public class Calculator
     {
         private int[] rolls;
 
@@ -14,26 +16,59 @@
             return new Calculator(rolls);
         }
 
-        public void GetScoreForAllRollsInGame(ref int score)
+        public int GetScoreForAllRollsInGame()
         {
-            int i = 0;
+            int rollIndex = 0;
+            int score = 0;
 
-            for (int f = 0; f < 10; f++)
+            for (int frame = 0; frame < 10; frame++)
             {
-                // spares
-                if (rolls[i] + rolls[i + 1] == 10)
+                if (IsStrike(rollIndex))
                 {
-                    score += 10 + rolls[i + 2];
-                    i++;
+                    score = CalculateScoreForStrike(score, rollIndex);
+                }
+                else if (IsSpare(rollIndex))
+                {
+                    score = CalculateScoreForSpare(score, rollIndex);
+                    rollIndex++;
                 }
                 else
                 {
-                    score += rolls[i] + rolls[i + 1];
-                    i++;
+                    score = CalculateScoreForOpen(score, rollIndex);
+                    rollIndex++;
                 }
 
-                i++;
+                rollIndex++;
             }
+            return score;
         }
+
+        private int CalculateScoreForOpen(int score, int rollIndex)
+        {
+            score += rolls[rollIndex] + rolls[rollIndex + 1];
+            return score;
+        }
+
+        private int CalculateScoreForSpare(int score, int rollIndex)
+        {
+            score += 10 + rolls[rollIndex + 2];
+            return score;
+        }
+
+        private int CalculateScoreForStrike(int score, int rollIndex)
+        {
+            return score += 10 + rolls[rollIndex + 1] + rolls[rollIndex + 2];
+        }
+
+        private bool IsSpare(int rollIndex)
+        {
+            return rolls[rollIndex] + rolls[rollIndex + 1] == 10;
+        }
+
+        public bool IsStrike(int rollIndex)
+        {
+            return rolls[rollIndex] == 10;
+        }
+
     }
 }

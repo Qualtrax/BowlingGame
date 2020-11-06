@@ -1,8 +1,8 @@
 ﻿using BowlingGame;
 
-namespace Namespace_1
+namespace BowlingGame
 {
-    public class Class1
+    public class TheGame
     {
         // initializes rolls array
         public int[] rolls = new int[21];
@@ -27,10 +27,7 @@ namespace Namespace_1
         {
             Calculator calculator = Calculator.GetRollCalculator(rolls);
 
-            var score = 0;
-            calculator.GetScoreForAllRollsInGame(ref score);
-
-            return score;
+            return calculator.GetScoreForAllRollsInGame();
         }
     }
 }

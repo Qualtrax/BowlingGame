@@ -12,24 +12,68 @@
 
         public int Score()
         {
-            int s = 0;
-            int i = 0;
+            int score = 0;
+            int roll = 0;
 
-            for (int f = 0; f < 10; f++)
-            {
-                if (rolls[i] + rolls[i + 1] == 10)
-                {
-                    s += 10 + rolls[i + 2];
-                }
-                else
-                {
-                    s += rolls[i] + rolls[i + 1];
-                }
+            for (int frame = 0; frame < 10; frame++)
+			{
+				var isStrike = IsStrike(roll);
+				if (isStrike)
+				{
+					score += CalculateValueForStrike(roll);
+				}
+				else if (IsSpare(roll))
+				{
+					score += CalculateValueForSpare(roll);
+				}
+				else
+				{
+					score += CalculatePinValue(roll);
+				}
 
-                i = i + 2;
-            }
+				roll = IncrementFrame(roll, isStrike);
+			}
 
-            return s;
+			return score;
         }
-    }
+
+		private int CalculatePinValue(int roll)
+		{
+			return rolls[roll] + rolls[roll + 1];
+		}
+
+		private int CalculateValueForSpare(int roll)
+		{
+			return 10 + rolls[roll + 2];
+		}
+
+		private int CalculateValueForStrike(int roll)
+		{
+			return 10 + rolls[roll + 1] + rolls[roll + 2];
+		}
+
+		private bool IsSpare(int roll)
+		{
+			return rolls[roll] + rolls[roll + 1] == 10;
+		}
+
+		private bool IsStrike(int roll)
+		{
+			return rolls[roll] == 10;
+		}
+
+		private int IncrementFrame(int roll, bool isStrike = false)
+		{
+			var frame = roll;
+			if (isStrike)
+			{
+				frame ++;
+			}
+			else
+			{
+				frame += 2;
+			}
+			return frame;
+		}
+	}
 }
